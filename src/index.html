@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthcare UI Lab</title>
+  style>
+   body {
+font-family : Arial, sans-serif;
+line-height: 1.6;
+background-color: lightblue;
+padding: 24px;
+    }
+    h1 {
+      color: #245C52;
+      font-size: 32px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    button {
+      padding: 12px 24px;
+      border: 2px solid black;
+      border-radius: 8px;
+      background-color: #DCEFE8;
+      color: #245C52;
+      font-weight: bold;
+     }
+    </style> 
+</head>
+<body>
+  <main>
+    <h1>Welcome to Healthcare UI Lab</h1>
+    <p>This is my first webpage. I'm learning how to build accessible healthcare interfaces.</p>
+    <button id="learnButton" type="button">Click me</button>
+    <p id="message" aria-live="polite"></p>
+  </main>
+
+  <script>
+    const button = document.querySelector("#learnButton");
+    const message = document.querySelector("#message");
+
+    button.addEventListener("click", () => {
+      message.textContent = "Your button works!";
+      console.log("The button was clicked.");
+    });
+  </script>
+</body>
+</html>

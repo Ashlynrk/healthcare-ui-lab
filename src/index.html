@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Healthcare UI Lab</title>
-  style>
+  <style>
    body {
 font-family : Arial, sans-serif;
 line-height: 1.6;
@@ -13,9 +13,12 @@ padding: 24px;
     }
     h1 {
       color: #245C52;
-      font-size: 32px;
+      font-size: 36px;
       margin-bottom: 24px;
       text-align: left;
+    }
+    p {
+  line-height: 1.6;
     }
     button {
       padding: 12px 24px;
@@ -24,21 +27,38 @@ padding: 24px;
       background-color: #DCEFE8;
       color: #245C52;
       font-weight: bold;
+      max-width: 1100px;
+margin: 0 auto;
      }
+     .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 32px;
+  margin-top: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
     </style> 
 </head>
 <body>
   <main>
-    <h1>Welcome to Healthcare UI Lab</h1>
-    <p>This is my first webpage. I'm learning how to build accessible healthcare interfaces.</p>
-    <button id="learnButton" type="button">Click me</button>
+    <div class="container">
+      <h1>Welcome to Healthcare UI Lab</h1>
+      <p>This is my first webpage. I'm learning how to build accessible healthcare interfaces.</p>
+      <button id="learnButton" type="button">Click me</button>
+    </div>
+    </main>
     <p id="message" aria-live="polite"></p>
   </main>
-
   <script>
     const button = document.querySelector("#learnButton");
     const message = document.querySelector("#message");
-
     button.addEventListener("click", () => {
       message.textContent = "Your button works!";
       console.log("The button was clicked.");

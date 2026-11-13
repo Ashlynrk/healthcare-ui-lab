@@ -1,0 +1,30 @@
+:root {
+  --page: #f4efe6;
+  --card: #fbf7f0;
+  --ink: #2c2825;
+  --muted: #5a5148;
+  --olive: #3f4f38;
+  --olive-wash: #e3e6d2;
+  --mustard: #c6a15a;
+  --mustard-wash: #f0e2c0;
+  --terracotta: #8e4636;
+  --terracotta-hover: #74392c;
+  --teal: #2c5e5a;
+  --teal-wash: #d5e4e1;
+  --peach: #f3d6c6;
+  --line: #e4d8c8;
+  --shadow: 0 16px 40px rgba(62, 42, 28, 0.08);
+  --font-body: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+  --font-heading: "Fraunces", "Iowan Old Style", Palatino, Georgia, serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius: 18px;
+  --radius-control: 12px;
+  --max: 1040px;
+  --tap: 44px;
+}

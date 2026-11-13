@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today · Healthcare UI Lab</title>
+  <style>
+    :root {
+      --page: #F6F3EE;
+      --ink: #1C2B28;
+      --muted: #3E524C;
+      --teal: #245C52;
+      --teal-hover: #1C4A42;
+      --sage: #E7F2EC;
+      --card: #ffffff;
+      --line: #E4DED4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--ink);
+      background-color: var(--page);
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .page-header {
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--teal);
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lede,
+    .meta {
+      color: var(--muted);
+    }
+
+    .lede {
+      max-width: 40rem;
+    }
+
+    .card-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 24px;
+      background-color: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(36, 60, 52, 0.06);
+    }
+
+    .status {
+      align-self: flex-start;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background-color: var(--sage);
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .appointment-note {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .card-action {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    button {
+      min-height: 44px;
+      padding: 12px 20px;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      background-color: var(--teal);
+      color: #ffffff;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: var(--teal-hover);
+    }
+
+    button:focus-visible {
+      outline: 3px solid var(--teal);
+      outline-offset: 3px;
+    }
+
+    button:disabled {
+      background-color: var(--sage);
+      color: var(--teal);
+      cursor: default;
+    }
+
+    .live-message {
+      min-height: 1.5em;
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    @media (min-width: 800px) {
+      main {
+        padding: 48px;
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <p class="eyebrow">Today</p>
+      <h1>Good morning</h1>
+      <p class="lede">A sample overview for managing an ongoing condition. This is not a real health record.</p>
+    </header>
+
+    <div class="card-grid">
+      <section class="card" aria-labelledby="medication-heading">
+        <h2 id="medication-heading">Medication</h2>
+        <p>Sample Daily Tablet</p>
+        <p class="status">Taken today</p>
+        <p class="meta">Sample dose at 8:00 AM</p>
+      </section>
+
+      <section class="card" aria-labelledby="symptom-heading">
+        <h2 id="symptom-heading">Symptom check-in</h2>
+        <p>Note how you feel so today's record stays up to date.</p>
+        <div class="card-action">
+          <button id="learnButton" type="button">Log symptoms</button>
+          <p id="message" class="live-message" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="appointment-heading">
+        <h2 id="appointment-heading">Upcoming appointment</h2>
+        <p>Routine check-in</p>
+        <p class="appointment-note">Next appointment ·<br>Date not set</p>
+        <p class="meta">Riverside Sample Clinic</p>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const button = document.querySelector("#learnButton");
+    const message = document.querySelector("#message");
+
+    button.addEventListener("click", () => {
+      message.textContent = "Symptoms logged for today. This is sample feedback only.";
+      button.textContent = "Symptoms logged";
+      button.disabled = true;
+      console.log("The button was clicked.");
+    });
+  </script>
+</body>
+</html>

@@ -1,27 +1,25 @@
 import { useEffect } from "react";
-import { toISODate, todayDate } from "../lib/dates";
+import { CheckInFlow } from "../components/checkin/CheckInFlow";
+import { greetingForHour, toISODate, todayDate } from "../lib/dates";
+import { MOOD_OPTIONS } from "../lib/checkin";
 import { useAppState } from "../state/AppStateProvider";
 
 export function DailyLogPage() {
   const { state } = useAppState();
   const today = toISODate(todayDate());
-  const startedToday = state.checkIns.some((entry) => entry.date === today);
+  const previous = state.checkIns
+    .filter((entry) => entry.date < today && entry.mood)
+    .sort((a, b) => b.date.localeCompare(a.date))[0];
+  const moodLabel = MOOD_OPTIONS.find((option) => option.id === previous?.mood)?.label.toLowerCase();
+  const hour = new Date().getHours();
 
   useEffect(() => {
     document.title = "Today · Healthcare UI Lab";
   }, []);
 
-  const saved = [
-    { label: "Earlier check-ins", value: state.checkIns.length },
-    { label: "Medications", value: state.medications.length },
-    { label: "Visits", value: state.appointments.length },
-    { label: "Journal entries", value: state.journal.length },
-    { label: "Notes", value: state.notes.length },
-  ];
-
   return (
     <>
-      <section className="panel panel-hero" aria-labelledby="today-title">
+      <section className="panel panel-hero panel-hero-compact" aria-labelledby="today-title">
         <div className="hero-shapes" aria-hidden="true">
           <span className="shape-arch" />
           <span className="shape-circle" />
@@ -29,26 +27,17 @@ export function DailyLogPage() {
         </div>
         <div className="hero-copy">
           <p className="eyebrow">Today</p>
-          <h1 id="today-title">Your day starts here</h1>
+          <h1 id="today-title">
+            {greetingForHour(hour)}, {state.preferences.displayName}
+          </h1>
           <p className="lede">
-            {startedToday
-              ? "Today’s check-in is already saved in this browser."
-              : "Today’s check-in has not been started. Earlier sample days are already saved."}
+            {moodLabel
+              ? `Your last check-in felt ${moodLabel}. Today starts clean.`
+              : "Today starts clean. Earlier sample days stay saved."}
           </p>
-          <p className="meta">The daily check-in, encouragement, and medication list will open on this page.</p>
         </div>
       </section>
-      <section aria-labelledby="saved-title">
-        <h2 id="saved-title">Saved with this sample profile</h2>
-        <ul className="stat-list">
-          {saved.map((item) => (
-            <li key={item.label} className="stat-card">
-              <span className="stat-value">{item.value}</span>
-              <span className="stat-label">{item.label}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <CheckInFlow />
     </>
   );
 }

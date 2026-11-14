@@ -120,6 +120,7 @@ export function createSeed(): AppState {
         enabled: true,
       },
     ],
+    symptomCatalog: [],
     checkIns,
     medications,
     doses,

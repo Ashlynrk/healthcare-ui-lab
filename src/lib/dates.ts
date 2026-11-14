@@ -22,6 +22,12 @@ export function atLocalTime(dayOffset: number, hours: number, minutes = 0): stri
   return date.toISOString();
 }
 
+export function greetingForHour(hour: number): string {
+  if (hour < 12) return "Good morning";
+  if (hour < 17) return "Good afternoon";
+  return "Good evening";
+}
+
 export function formatLongDate(date: Date): string {
   return new Intl.DateTimeFormat("en", {
     weekday: "long",

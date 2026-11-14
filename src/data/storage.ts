@@ -28,7 +28,10 @@ export function loadState(): AppState {
     if (!raw) return persist(createSeed());
     const parsed: unknown = JSON.parse(raw);
     if (!isAppState(parsed)) return persist(createSeed());
-    return parsed;
+    return {
+      ...parsed,
+      symptomCatalog: Array.isArray(parsed.symptomCatalog) ? parsed.symptomCatalog : [],
+    };
   } catch {
     return persist(createSeed());
   }

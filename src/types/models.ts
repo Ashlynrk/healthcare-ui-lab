@@ -8,6 +8,17 @@ export type Mood = "low" | "uneasy" | "steady" | "good" | "bright";
 
 export type SymptomId = "headache" | "pain" | "fatigue" | "sleep";
 
+export type SleepDuration = "under-5" | "5-6" | "7-8" | "9-plus" | "unsure";
+
+export type CheckInStep =
+  | "mood"
+  | "sleepDuration"
+  | "sleepQuality"
+  | "stress"
+  | "energy"
+  | "symptoms"
+  | "reflection";
+
 export type CustomQuestionKind = "rating" | "text";
 
 export type DoseStatus = "pending" | "taken" | "missed" | "snoozed";
@@ -31,14 +42,30 @@ export interface CustomAnswer {
   value: number | string;
 }
 
+export interface SymptomDefinition {
+  id: string;
+  label: string;
+}
+
 export interface CheckIn {
   date: string;
-  mood: Mood;
-  energy: LevelRating;
-  stress: LevelRating;
-  symptoms: SymptomRating[];
-  answers: CustomAnswer[];
-  note: string;
+  mood?: Mood;
+  energy?: LevelRating;
+  stress?: LevelRating;
+  /** Original 0–5 sample ratings. New check-ins leave this list as they found it. */
+  symptoms?: SymptomRating[];
+  /** Ids from the built-in list or the profile catalog. */
+  selectedSymptomIds?: string[];
+  symptomsNone?: boolean;
+  /** True after Continue or None today, so a refresh can tell a finished symptom step from a pause. */
+  symptomsConfirmed?: boolean;
+  sleepDuration?: SleepDuration;
+  sleepQuality?: LevelRating;
+  answers?: CustomAnswer[];
+  note?: string;
+  reflectionPromptId?: string;
+  skipped?: CheckInStep[];
+  completedAt?: string;
   updatedAt: string;
 }
 
@@ -94,6 +121,8 @@ export interface AppState {
   profileLabel: "Sample profile";
   preferences: Preferences;
   customQuestions: CustomQuestion[];
+  /** Custom symptoms added by the person. Built-in symptoms are not copied here. */
+  symptomCatalog: SymptomDefinition[];
   checkIns: CheckIn[];
   medications: Medication[];
   doses: DoseLog[];
